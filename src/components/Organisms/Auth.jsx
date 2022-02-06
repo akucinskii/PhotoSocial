@@ -1,6 +1,6 @@
 import { useState } from "react";
-import BigLogo from "./components/Atoms/BigLogo";
-import { supabase } from "./supabaseClient";
+import BigLogo from "../Atoms/BigLogo";
+import { supabase } from "../../supabaseClient";
 
 export default function Auth() {
   const [loading, setLoading] = useState(false);
