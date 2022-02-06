@@ -38,7 +38,7 @@ function Card(props) {
             <h1>Users who like, and {props.value.likes} users</h1>
             <ul>
               {user.map((value, index) => (
-                <li className="text-sm text-gray-300">
+                <li key={index} className="text-sm text-gray-300">
                   {value}: {comment[index]}
                 </li>
               ))}

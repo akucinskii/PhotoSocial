@@ -3,7 +3,7 @@ import Navbar from "../Molecules/Navbar";
 import StoryBar from "../Molecules/StoryBar";
 import Cards from "../Organisms/Cards";
 
-const Layout = ({ children }) => {
+const Layout = () => {
   return (
     <div>
       <Navbar />
