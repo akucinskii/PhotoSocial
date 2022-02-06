@@ -9,9 +9,12 @@ function StoryBar() {
     "yellow",
     "purple",
     "dymd",
+    "jd",
+    "pogu",
+    "testststst",
   ];
   return (
-    <div className="flex flex-row w-full gap-8  h-fit border-y-2 border-gray-800 p-2 overflow-hidden">
+    <div className="flex flex-row w-full gap-8  h-fit border-y-2 border-gray-800 p-2 overflow-hidden hover:overflow-x-auto scrollbar">
       {numbers.map((value, index) => (
         <RoundIcon key={index} value={value} />
       ))}
