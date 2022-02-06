@@ -67,7 +67,7 @@ export default function Account({ session }) {
   }
 
   return (
-    <div className="text-white flex flex-col items-center gap-6 max-w-lg w-full">
+    <div className="text-white flex flex-col items-center content-evenly md:content-none gap-1 md:gap-2 max-h-screen max-w-lg w-full">
       <Avatar
         url={avatar_url}
         size={150}

@@ -51,7 +51,7 @@ const Layout = ({ session }) => {
       <div className="flex w-full max-w-screen justify-center">
         <div className="flex flex-col gap-4 pt-20 w-full max-w-lg justify-center">
           <StoryBar />
-          <Cards />
+          <Cards session={session} />
         </div>
       </div>
     </div>

@@ -24,6 +24,7 @@ export default function Auth() {
       <div className="flex flex-col items-center justify-items-center gap-4">
         <BigLogo>PhotoSocial</BigLogo>
         <p className="">Sign in via magic link with your email below</p>
+
         <div>
           <input
             className="bg-transparent border-gray-800 border-2 rounded-lg p-1 focus:outline-none placeholder:italic placeholder:text-white"

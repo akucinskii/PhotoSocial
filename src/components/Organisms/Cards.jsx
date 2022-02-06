@@ -1,41 +1,43 @@
 import Card from "../Molecules/Card";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { supabase } from "../../supabaseClient";
+function Cards({ session }) {
+  const [cardList2, setCardList] = useState([]);
+  const [image_url, setImageUrl] = useState(null);
 
-function Cards() {
-  const CardList = [
-    {
-      user: "John",
-      likes: "59",
-      img: "https://i.imgur.com/VfyMm9U.jpg",
-      gps: "Zegarkownia",
-      time: "4 hours", //temporary value
-      comments: [
-        { wojtek: "NO i spoko" },
-        { wojtek: "Pog" },
-        { wojtek: "Cudne" },
-      ],
-    },
-    {
-      user: "Wojtek",
-      likes: "69",
-      img: "https://i.imgur.com/DPjxaqI.png",
-      gps: "Nie zegarkownia",
-      time: "21 days", //temporary value
-      comments: [{ michal: "Gites byku" }, { robert: "fajne" }, { xd: "Git" }],
-    },
-    {
-      user: "Marcin",
-      likes: "26",
-      img: "https://i.imgur.com/1P3twio.png",
-      gps: "Zegarkownia",
-      time: "1", //temporary value
-      comments: [{ michal: "fajne" }, { robert: "okok" }, { xd: "orajt" }],
-    },
-  ];
+  useEffect(() => {
+    getProfile();
+  }, [session]);
+
+  async function getProfile() {
+    try {
+      let { data, error, status } = await supabase.from("Posts").select(`
+      id,
+      heart_count,
+      description,
+      img_url,
+      gps,
+      created_at,
+      profiles:profile_id (username, avatar_url)
+      `);
+
+      if (error && status !== 406) {
+        throw error;
+      }
+
+      if (data) {
+        setCardList(data);
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  }
+  console.log(cardList2);
+
   return (
     <div className="flex flex-col gap-8">
-      {CardList.map((value, index) => (
-        <Card key={index} value={value} />
+      {cardList2.map((value) => (
+        <Card key={value.id} value={value} url={value.img_url} />
       ))}
     </div>
   );

@@ -1,24 +1,66 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { supabase } from "../../supabaseClient";
+import ProfileIcon from "../Atoms/ProfileIcon";
 
-function Card(props) {
-  let user = [];
-  let comment = [];
-  let x = props.value.comments;
-  for (var i = 0; i < x.length; i++) {
-    var obj = x[i];
-    // for..in object iteration will set the key for each pair
-    // and the value is in obj[key]
-    for (var key in obj) {
-      user.push(key);
-      comment.push(obj[key]);
+function Card({ url, value }) {
+  const [imageUrl, setImageUrl] = useState(null);
+  const [avatarUrl, setAvatarUrl] = useState(null);
+
+  useEffect(() => {
+    if (url) downloadIcon(value.profiles.avatar_url);
+  }, [url]);
+  useEffect(() => {
+    if (url) downloadImage(url);
+  }, [url]);
+
+  async function downloadIcon(path) {
+    console.log(path);
+    try {
+      const { data, error } = await supabase.storage
+        .from("avatars")
+        .download(path);
+      if (error) {
+        throw error;
+      }
+      const url = URL.createObjectURL(data);
+      setAvatarUrl(url);
+    } catch (error) {
+      console.log("Error downloading image: ", error.message);
     }
   }
+
+  async function downloadImage(path) {
+    console.log(path);
+    try {
+      const { data, error } = await supabase.storage
+        .from("avatars")
+        .download(path);
+      if (error) {
+        throw error;
+      }
+      const url = URL.createObjectURL(data);
+      setImageUrl(url);
+    } catch (error) {
+      console.log("Error downloading image: ", error.message);
+    }
+  }
+  function toTimestamp(strDate) {
+    var datum = Date.parse(strDate);
+    return datum / 1000;
+  }
+  let time = Date.now();
+  let created_at = toTimestamp(value.created_at);
+  let howLongAgo = new Date(time - created_at).getHours();
+
   return (
-    <div className="flex flex-col w-full max-w-screen h-fit p-2">
-      <div className="p-4 text-lg">{props.value.user}</div>
+    <div className="flex flex-col w-full h-fit p-2">
+      <div className="p-4 text-lg flex flex-row gap-2">
+        <ProfileIcon url={avatarUrl} />
+        <h1>{value.profiles.username}</h1>
+      </div>
       <div>
         <img
-          src={props.value.img}
+          src={imageUrl}
           alt=""
           className="object-cover object-center h-[32rem] w-full"
         />
@@ -38,15 +80,13 @@ function Card(props) {
             </button>
           </div>
           <div className="p-2">
-            <h1>Users who like, and {props.value.likes} users</h1>
-            <ul>
-              {user.map((value, index) => (
-                <li key={index} className="text-sm text-gray-300">
-                  {value}: {comment[index]}
-                </li>
-              ))}
-            </ul>
-            <p className="text-xs text-gray-600">{props.value.time} ago</p>
+            <h1>{value.heart_count} users like it</h1>
+            <p className="text-gray-200">{value.description}</p>
+            <p className="text-xs text-gray-600">
+              {howLongAgo > 24
+                ? `${howLongAgo % 24} days ago`
+                : `${howLongAgo} hours ago`}
+            </p>
           </div>
         </div>
       </div>

@@ -10,6 +10,7 @@ export default function Avatar({ url, size, onUpload }) {
   }, [url]);
 
   async function downloadImage(path) {
+    console.log(path);
     try {
       const { data, error } = await supabase.storage
         .from("avatars")
@@ -53,7 +54,6 @@ export default function Avatar({ url, size, onUpload }) {
     }
   }
 
-  console.log("avatar", url);
   return (
     <div className="flex flex-col gap-3 text-center">
       {avatarUrl ? (
