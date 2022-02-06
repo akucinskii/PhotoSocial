@@ -1,10 +1,21 @@
 # simple
 
-Instagram clone made with react and Tailwind CSS.
+Instagram clone made with react, Tailwind CSS and Supabase.
 
-To-do:
+Features:
+- Magic-link authorisation
+- Images are stored on supabase
+- Avatar image can be updated 
+- responsive design
+- posts are visible for everyone
 
-- Add supabase for backend instead of static assets.
+TO-DO:
+- private posts
+- Stories
+- profile page that everyone can access
+- chat (low-priority, probably will be never added)
+
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
