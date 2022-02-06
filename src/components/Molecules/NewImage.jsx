@@ -35,7 +35,6 @@ export default function Account({ session }, props) {
       alert(error.message);
     } finally {
       setLoading(false);
-      window.location.reload();
     }
   }
 
