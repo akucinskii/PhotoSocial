@@ -8,7 +8,7 @@ function Card({ url, value }) {
 
   useEffect(() => {
     if (url) downloadIcon(value.profiles.avatar_url);
-  }, [value.profiles.avatar_url]);
+  }, []);
   useEffect(() => {
     if (url) downloadImage(url);
   }, [url]);
@@ -48,7 +48,7 @@ function Card({ url, value }) {
   }
   let time = Date.now();
   let created_at = toTimestamp(value.created_at);
-  let howLongAgo = new Date(time - created_at).getHours();
+  let howLongAgo = new Date(Math.abs(created_at - time)).getHours();
 
   return (
     <div className="flex flex-col w-full h-fit p-2">
@@ -68,10 +68,10 @@ function Card({ url, value }) {
               <i className="bx bx-heart"></i>
             </button>
             <button>
-              <i className="bx bx-comment"></i>
+              <i className="bx bx-comment hidden"></i>
             </button>
             <button>
-              <i className="bx bx-paper-plane"></i>
+              <i className="bx bx-paper-plane "></i>
             </button>
             <button className="ml-auto">
               <i className="bx bx-bookmark"></i>
@@ -82,7 +82,7 @@ function Card({ url, value }) {
             <p className="text-gray-200">{value.description}</p>
             <p className="text-xs text-gray-600">
               {howLongAgo > 24
-                ? `${howLongAgo % 24} days ago`
+                ? `${howLongAgo / 24} days ago`
                 : `${howLongAgo} hours ago`}
             </p>
           </div>

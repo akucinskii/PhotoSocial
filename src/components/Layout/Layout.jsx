@@ -3,6 +3,7 @@ import Navbar from "../Molecules/Navbar";
 import StoryBar from "../Molecules/StoryBar";
 import Cards from "../Organisms/Cards";
 import { supabase } from "../../supabaseClient";
+import Footer from "../Atoms/Footer";
 
 const Layout = ({ session }) => {
   const [loading, setLoading] = useState(true);
@@ -54,6 +55,7 @@ const Layout = ({ session }) => {
           <Cards session={session} />
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

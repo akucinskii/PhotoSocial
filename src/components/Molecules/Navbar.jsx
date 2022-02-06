@@ -57,13 +57,13 @@ function Navbar({ url, session }) {
               <i className="bx bx-image-add"></i>
             </SmallButton>
             <SmallButton>
-              <i className="bx bx-message-square-detail"></i>
+              <i className="bx bx-message-square-detail hidden"></i>
             </SmallButton>
             <SmallButton>
-              <i className="bx bx-compass"></i>
+              <i className="bx bx-compass hidden"></i>
             </SmallButton>
             <SmallButton>
-              <i className="bx bx-heart"></i>
+              <i className="bx bx-heart hidden"></i>
             </SmallButton>
           </div>
         </div>
