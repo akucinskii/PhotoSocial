@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "../../supabaseClient";
 
 export default function Avatar({ url, size, onUpload }) {
-  const [avatarUrl, setAvatarUrl] = useState(null);
+  const [ImageUrl, setImageUrl] = useState(null);
   const [uploading, setUploading] = useState(false);
 
   useEffect(() => {
@@ -18,13 +18,12 @@ export default function Avatar({ url, size, onUpload }) {
         throw error;
       }
       const url = URL.createObjectURL(data);
-      setAvatarUrl(url);
+      setImageUrl(url);
     } catch (error) {
       console.log("Error downloading image: ", error.message);
     }
   }
-
-  async function uploadAvatar(event) {
+  async function uploadImage(event) {
     try {
       setUploading(true);
 
@@ -55,22 +54,18 @@ export default function Avatar({ url, size, onUpload }) {
 
   return (
     <div className="flex flex-col gap-3 text-center">
-      {avatarUrl ? (
+      {ImageUrl ? (
         <img
-          src={avatarUrl}
+          src={ImageUrl}
           alt="Avatar"
-          className="rounded-full object-cover"
-          style={{ height: size, width: size }}
+          className="w-72 h-72 object-cover max-w-screen"
         />
       ) : (
-        <div
-          className="bg-gray-200 rounded-full"
-          style={{ height: size, width: size }}
-        />
+        <div className="bg-gray-200 rounded-full w-full" />
       )}
       <div className="border-2 border-gray-800 rounded-lg p-2 hover:bg-gray-900 active:bg-gray-800 focus:bg-gray-900">
-        <label className="button primary block" htmlFor="single">
-          {uploading ? "Uploading ..." : "Upload"}
+        <label className="button primary block" htmlFor="image">
+          {uploading ? "Uploading ..." : "Choose image"}
         </label>
         <input
           style={{
@@ -78,9 +73,9 @@ export default function Avatar({ url, size, onUpload }) {
             position: "absolute",
           }}
           type="file"
-          id="single"
+          id="image"
           accept="image/*"
-          onChange={uploadAvatar}
+          onChange={uploadImage}
           disabled={uploading}
         />
       </div>

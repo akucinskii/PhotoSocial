@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
+import { supabase } from "../../supabaseClient";
 import InputBox from "../Atoms/InputBox";
 import Logo from "../Atoms/Logo";
-import SmallButton from "../Atoms/SmallButton";
-import { supabase } from "../../supabaseClient";
 import ProfileIcon from "../Atoms/ProfileIcon";
+import SmallButton from "../Atoms/SmallButton";
 import Account from "./Account";
+import NewImage from "./NewImage";
 
 function Navbar({ url, session }) {
   const [avatarUrl, setAvatarUrl] = useState(null);
   const [isShown, setIsShown] = useState(false);
+  const [isAddShown, setIsAddShown] = useState(false);
 
   useEffect(() => {
     if (url) downloadImage(url);
@@ -30,8 +32,15 @@ function Navbar({ url, session }) {
   }
 
   const ShowSettings = () => {
+    if (isAddShown) setIsAddShown(false);
     setIsShown(!isShown);
     console.log(isShown);
+  };
+
+  const ShowAdd = () => {
+    if (isShown) setIsShown(false);
+    setIsAddShown(!isAddShown);
+    console.log(isAddShown);
   };
   return (
     <div>
@@ -44,7 +53,7 @@ function Navbar({ url, session }) {
             <SmallButton>
               <i className="bx bx-home"></i>
             </SmallButton>
-            <SmallButton>
+            <SmallButton click={ShowAdd}>
               <i className="bx bx-image-add"></i>
             </SmallButton>
             <SmallButton>
@@ -65,6 +74,13 @@ function Navbar({ url, session }) {
         } transition-all`}
       >
         <Account key={session.user.id} session={session} />
+      </div>
+      <div
+        className={`fixed flex justify-center w-full max-w-screen mt-12 overflow-hidden bg-black p-4 border-b-2 border-gray-800 ${
+          isAddShown ? "" : "hidden"
+        } transition-all`}
+      >
+        <NewImage key={session.user.id} session={session} click={ShowAdd} />
       </div>
     </div>
   );

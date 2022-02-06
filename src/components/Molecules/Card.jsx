@@ -8,13 +8,12 @@ function Card({ url, value }) {
 
   useEffect(() => {
     if (url) downloadIcon(value.profiles.avatar_url);
-  }, [url]);
+  }, [value.profiles.avatar_url]);
   useEffect(() => {
     if (url) downloadImage(url);
   }, [url]);
 
   async function downloadIcon(path) {
-    console.log(path);
     try {
       const { data, error } = await supabase.storage
         .from("avatars")
@@ -30,7 +29,6 @@ function Card({ url, value }) {
   }
 
   async function downloadImage(path) {
-    console.log(path);
     try {
       const { data, error } = await supabase.storage
         .from("avatars")

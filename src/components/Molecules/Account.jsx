@@ -55,6 +55,7 @@ export default function Account({ session }) {
       let { error } = await supabase.from("profiles").upsert(updates, {
         returning: "minimal", // Don't return the value after inserting
       });
+      console.log("OKK");
 
       if (error) {
         throw error;

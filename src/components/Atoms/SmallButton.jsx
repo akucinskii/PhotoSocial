@@ -1,9 +1,9 @@
 import React from "react";
 
-function SmallButton({ children }) {
+function SmallButton({ children, click }) {
   return (
     <div className="text-white text-xl">
-      <button>{children}</button>
+      <button onClick={click}>{children}</button>
     </div>
   );
 }

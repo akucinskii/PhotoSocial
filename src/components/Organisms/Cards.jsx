@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { supabase } from "../../supabaseClient";
 function Cards({ session }) {
   const [cardList2, setCardList] = useState([]);
-  const [image_url, setImageUrl] = useState(null);
 
   useEffect(() => {
     getProfile();
@@ -11,7 +10,10 @@ function Cards({ session }) {
 
   async function getProfile() {
     try {
-      let { data, error, status } = await supabase.from("Posts").select(`
+      let { data, error, status } = await supabase
+        .from("Posts")
+        .select(
+          `
       id,
       heart_count,
       description,
@@ -19,7 +21,9 @@ function Cards({ session }) {
       gps,
       created_at,
       profiles:profile_id (username, avatar_url)
-      `);
+      `
+        )
+        .limit(10);
 
       if (error && status !== 406) {
         throw error;
@@ -32,10 +36,9 @@ function Cards({ session }) {
       alert(error.message);
     }
   }
-  console.log(cardList2);
 
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col-reverse gap-8">
       {cardList2.map((value) => (
         <Card key={value.id} value={value} url={value.img_url} />
       ))}

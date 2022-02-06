@@ -1,7 +1,6 @@
 import React from "react";
 
 function ProfileIcon(props) {
-  console.log(props);
   return (
     <button onClick={props.click}>
       <div className="align-center items-center mb-auto rounded-full overflow-hidden">
