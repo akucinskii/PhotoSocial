@@ -41,7 +41,13 @@ const Layout = ({ session }) => {
   }
   return (
     <div>
-      <Navbar url={avatar_url} username={username} />
+      <Navbar
+        session={session}
+        url={avatar_url}
+        loading={loading}
+        website={website}
+        username={username}
+      />
       <div className="flex w-full max-w-screen justify-center">
         <div className="flex flex-col gap-4 pt-20 w-full max-w-lg justify-center">
           <StoryBar />

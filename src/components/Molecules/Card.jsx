@@ -13,9 +13,9 @@ function Card(props) {
       comment.push(obj[key]);
     }
   }
-  console.log(user, comment);
   return (
-    <div className="flex flex-col w-full h-fit border-2 p-2 border-gray-800">
+    <div className="flex flex-col w-full max-w-screen h-fit p-2">
+      <div className="p-4 text-lg">{props.value.user}</div>
       <div>
         <img
           src={props.value.img}

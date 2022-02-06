@@ -1,11 +1,19 @@
 import React from "react";
 
-function ProfileIcon({ url }) {
-  console.log("url profile icon", url);
+function ProfileIcon(props) {
+  console.log(props);
   return (
-    <button>
+    <button onClick={props.click}>
       <div className="align-center items-center mt-auto mb-auto rounded-full overflow-hidden">
-        <img src={url} alt="" className="object-cover w-[24px] h-[24px]" />
+        {!props.url ? (
+          <div className="w-[24px] h-[24px] bg-gray-800" />
+        ) : (
+          <img
+            src={props.url}
+            alt=""
+            className="object-cover w-[24px] h-[24px]"
+          />
+        )}
       </div>
     </button>
   );

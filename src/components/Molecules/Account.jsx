@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { supabase } from "./supabaseClient";
+import { supabase } from "../../supabaseClient";
 import Avatar from "./Avatar";
 
 export default function Account({ session }) {
@@ -67,7 +67,7 @@ export default function Account({ session }) {
   }
 
   return (
-    <div className="text-white flex flex-col ">
+    <div className="text-white flex flex-col items-center gap-6 max-w-lg w-full">
       <Avatar
         url={avatar_url}
         size={150}
@@ -76,34 +76,40 @@ export default function Account({ session }) {
           updateProfile({ username, website, avatar_url: url });
         }}
       />
-      <div>
-        <label htmlFor="email">Email</label>
-        <input id="email" type="text" value={session.user.email} disabled />
+      <div className="w-fit">
+        <p>Email:</p>
+        <input
+          id="email"
+          type="text"
+          className="bg-black border-2 border-gray-800 focus:outline-none rounded-lg p-1 disabled:bg-gray-400"
+          value={session.user.email}
+          disabled
+        />
       </div>
       <div>
-        <label htmlFor="username">Name</label>
+        <p>Name:</p>
         <input
           id="username"
           type="text"
           value={username || ""}
           onChange={(e) => setUsername(e.target.value)}
-          className="bg-transparent"
+          className="bg-black border-2 border-gray-800 focus:outline-none rounded-lg p-1"
         />
       </div>
       <div>
-        <label htmlFor="website">Website</label>
+        <p>WEBSITE:</p>
         <input
           id="website"
           type="website"
           value={website || ""}
           onChange={(e) => setWebsite(e.target.value)}
-          className="bg-transparent"
+          className="bg-black border-2 border-gray-800 focus:outline-none rounded-lg p-1"
         />
       </div>
 
       <div>
         <button
-          className="button block primary"
+          className="bg-black border-2 border-gray-800 focus:outline-none rounded-lg p-2 px-4 hover:bg-gray-900 active:bg-gray-800 focus:bg-gray-900 disabled:bg-gray-400"
           onClick={() => updateProfile({ username, website, avatar_url })}
           disabled={loading}
         >
@@ -113,7 +119,7 @@ export default function Account({ session }) {
 
       <div>
         <button
-          className="button block"
+          className="bg-black border-2 border-gray-800 focus:outline-none rounded-lg p-2 hover:bg-gray-900 active:bg-gray-800 focus:bg-gray-900 disabled:bg-gray-400"
           onClick={() => supabase.auth.signOut()}
         >
           Sign Out

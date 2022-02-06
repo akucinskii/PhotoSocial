@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { supabase } from "./supabaseClient";
+import { supabase } from "../../supabaseClient";
 
 export default function Avatar({ url, size, onUpload }) {
   const [avatarUrl, setAvatarUrl] = useState(null);
@@ -55,21 +55,21 @@ export default function Avatar({ url, size, onUpload }) {
 
   console.log("avatar", url);
   return (
-    <div>
+    <div className="flex flex-col gap-3 text-center">
       {avatarUrl ? (
         <img
           src={avatarUrl}
           alt="Avatar"
-          className="avatar image"
+          className="rounded-full object-cover"
           style={{ height: size, width: size }}
         />
       ) : (
         <div
-          className="avatar no-image"
+          className="bg-gray-200 rounded-full"
           style={{ height: size, width: size }}
         />
       )}
-      <div style={{ width: size }}>
+      <div className="border-2 border-gray-800 rounded-lg p-2 hover:bg-gray-900 active:bg-gray-800 focus:bg-gray-900">
         <label className="button primary block" htmlFor="single">
           {uploading ? "Uploading ..." : "Upload"}
         </label>
