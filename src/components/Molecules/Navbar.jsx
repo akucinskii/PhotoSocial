@@ -1,7 +1,7 @@
 import React from "react";
-import InputBox from "./Atoms/InputBox";
-import Logo from "./Atoms/Logo";
-import SmallButton from "./Atoms/SmallButton";
+import InputBox from "../Atoms/InputBox";
+import Logo from "../Atoms/Logo";
+import SmallButton from "../Atoms/SmallButton";
 
 function Navbar() {
   return (
