@@ -7,8 +7,8 @@ function Card({ url, value }) {
   const [avatarUrl, setAvatarUrl] = useState(null);
 
   useEffect(() => {
-    if (url) downloadIcon(value.profiles.avatar_url);
-  }, []);
+    if (value.profiles.avatar_url) downloadIcon(value.profiles.avatar_url);
+  }, [value.profiles.avatar_url]);
   useEffect(() => {
     if (url) downloadImage(url);
   }, [url]);
