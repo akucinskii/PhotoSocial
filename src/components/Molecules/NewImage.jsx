@@ -79,6 +79,9 @@ export default function Account({ session }, props) {
         >
           {loading ? "Loading ..." : "Upload your image"}
         </button>
+        <p className="bg-gray-600">
+          Reload your page after a successful upload
+        </p>
       </div>
     </div>
   );
