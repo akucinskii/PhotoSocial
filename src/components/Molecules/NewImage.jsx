@@ -35,6 +35,7 @@ export default function Account({ session }, props) {
       alert(error.message);
     } finally {
       setLoading(false);
+      window.location.reload(false);
     }
   }
 
@@ -72,12 +73,9 @@ export default function Account({ session }, props) {
       <div>
         <button
           className="bg-black border-2 border-gray-800 focus:outline-none rounded-lg p-2 px-4 hover:bg-gray-900 active:bg-gray-800 focus:bg-gray-900 disabled:bg-gray-400"
-          onClick={
-            (props.click,
-            () => {
-              CreatePost({ description, gps, imgUrl });
-            })
-          }
+          onClick={() => {
+            CreatePost({ description, gps, imgUrl });
+          }}
           disabled={loading}
         >
           {loading ? "Loading ..." : "Upload your image"}
