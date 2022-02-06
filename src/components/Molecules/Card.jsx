@@ -23,7 +23,7 @@ function Card(props) {
           className="object-cover object-center h-[32rem] w-full"
         />
         <div>
-          <div className="flex flex-row text-3xl pt-3 w-1/2 gap-3">
+          <div className="flex flex-row text-3xl pt-3 w-full gap-3">
             <button>
               <i className="bx bx-heart"></i>
             </button>
@@ -32,6 +32,9 @@ function Card(props) {
             </button>
             <button>
               <i className="bx bx-paper-plane"></i>
+            </button>
+            <button className="ml-auto">
+              <i class="bx bx-bookmark"></i>
             </button>
           </div>
           <div className="p-2">
