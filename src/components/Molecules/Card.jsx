@@ -16,7 +16,7 @@ function Card(props) {
   console.log(user, comment);
   return (
     <div className="flex flex-col w-full h-fit border-2 p-2 border-gray-800">
-      <div className>
+      <div>
         <img
           src={props.value.img}
           alt=""
@@ -34,7 +34,7 @@ function Card(props) {
               <i className="bx bx-paper-plane"></i>
             </button>
             <button className="ml-auto">
-              <i class="bx bx-bookmark"></i>
+              <i className="bx bx-bookmark"></i>
             </button>
           </div>
           <div className="p-2">

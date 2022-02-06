@@ -53,6 +53,7 @@ export default function Avatar({ url, size, onUpload }) {
     }
   }
 
+  console.log("avatar", url);
   return (
     <div>
       {avatarUrl ? (

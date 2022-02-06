@@ -67,7 +67,7 @@ export default function Account({ session }) {
   }
 
   return (
-    <div className="form-widget">
+    <div className="text-white flex flex-col ">
       <Avatar
         url={avatar_url}
         size={150}
@@ -87,6 +87,7 @@ export default function Account({ session }) {
           type="text"
           value={username || ""}
           onChange={(e) => setUsername(e.target.value)}
+          className="bg-transparent"
         />
       </div>
       <div>
@@ -96,6 +97,7 @@ export default function Account({ session }) {
           type="website"
           value={website || ""}
           onChange={(e) => setWebsite(e.target.value)}
+          className="bg-transparent"
         />
       </div>
 
