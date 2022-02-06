@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 import { supabase } from "./supabaseClient";
-import Auth from "./Auth";
+import Auth from "./components/Organisms/Auth";
 import Layout from "./components/Layout/Layout";
-import Account from "./components/Molecules/Account";
 
 export default function Home() {
   const [session, setSession] = useState(null);
