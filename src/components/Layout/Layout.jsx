@@ -39,7 +39,6 @@ const Layout = ({ session }) => {
       setLoading(false);
     }
   }
-  console.log(username);
   return (
     <div>
       <Navbar url={avatar_url} username={username} />
