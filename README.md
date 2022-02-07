@@ -10,9 +10,9 @@ Features:
 - posts are visible for everyone
 
 TO-DO:
-- private posts
 - Stories
 - profile page that everyone can access
+- private posts
 - chat (low-priority, probably will be never added)
 
 
