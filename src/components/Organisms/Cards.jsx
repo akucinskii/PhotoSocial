@@ -20,9 +20,10 @@ function Cards({ session }) {
       img_url,
       gps,
       created_at,
-      profiles:profile_id (username, avatar_url)
+      profiles:profile_id (id, username, avatar_url)
       `
         )
+        .order("created_at", { ascending: true })
         .limit(10);
 
       if (error && status !== 406) {
@@ -40,7 +41,12 @@ function Cards({ session }) {
   return (
     <div className="flex flex-col-reverse gap-8">
       {cardList2.map((value) => (
-        <Card key={value.id} value={value} url={value.img_url} />
+        <Card
+          key={value.id}
+          id_atr={value.id}
+          value={value}
+          url={value.img_url}
+        />
       ))}
     </div>
   );

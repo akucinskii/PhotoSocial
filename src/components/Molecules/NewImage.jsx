@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 
 export default function Account({ session }, props) {
   const [loading, setLoading] = useState(false);
-  const [description, setdescription] = useState(null);
+  const [description, setDescription] = useState(null);
   const [gps, setLocation] = useState(null);
   const [imgUrl, setImageUrl] = useState(null);
   async function CreatePost({ description, gps, imgUrl }) {
@@ -54,7 +54,7 @@ export default function Account({ session }, props) {
           id="description"
           type="text"
           value={description || ""}
-          onChange={(e) => setdescription(e.target.value)}
+          onChange={(e) => setDescription(e.target.value)}
           className="bg-black border-2 border-gray-800 focus:outline-none rounded-lg p-1  w-fit overflow-auto"
         />
       </div>
