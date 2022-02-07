@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../../supabaseClient";
 
-export default function Avatar({ url, size, onUpload }) {
+export default function NewImageForm({ url, onUpload, story }) {
   const [ImageUrl, setImageUrl] = useState(null);
   const [uploading, setUploading] = useState(false);
 
   useEffect(() => {
     if (url) downloadImage(url);
-  }, [url]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [downloadImage]);
 
   async function downloadImage(path) {
+    console.log("download ", path);
     try {
       const { data, error } = await supabase.storage
         .from("avatars")
@@ -18,10 +20,14 @@ export default function Avatar({ url, size, onUpload }) {
         throw error;
       }
       const url = URL.createObjectURL(data);
+      if (story) {
+        story(url);
+      }
       setImageUrl(url);
     } catch (error) {
       console.log("Error downloading image: ", error.message);
     }
+    console.log("sucessfully downloaded image: ", url);
   }
   async function uploadImage(event) {
     try {
@@ -45,15 +51,15 @@ export default function Avatar({ url, size, onUpload }) {
       }
 
       onUpload(filePath);
+      console.log("onUpload", filePath);
     } catch (error) {
       alert(error.message);
     } finally {
       setUploading(false);
     }
   }
-
   return (
-    <div className="flex flex-col gap-3 text-center">
+    <div className="p-3 flex flex-col gap-3 text-center">
       {ImageUrl ? (
         <img
           src={ImageUrl}

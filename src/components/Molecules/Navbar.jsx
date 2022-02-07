@@ -7,7 +7,7 @@ import SmallButton from "../Atoms/SmallButton";
 import Account from "./Account";
 import NewImage from "./NewImage";
 
-function Navbar({ url, session }) {
+function Navbar({ url, session, showStory, setShowStory }) {
   const [avatarUrl, setAvatarUrl] = useState(null);
   const [isShown, setIsShown] = useState(false);
   const [isAddShown, setIsAddShown] = useState(false);
@@ -31,16 +31,18 @@ function Navbar({ url, session }) {
     }
   }
 
-  const ShowSettings = () => {
+  const showSettings = () => {
     if (isAddShown) setIsAddShown(false);
     setIsShown(!isShown);
-    console.log(isShown);
   };
 
-  const ShowAdd = () => {
+  const showAdd = () => {
     if (isShown) setIsShown(false);
     setIsAddShown(!isAddShown);
-    console.log(isAddShown);
+  };
+  const showNothing = () => {
+    setIsAddShown(false);
+    setIsShown(false);
   };
   return (
     <div>
@@ -49,20 +51,32 @@ function Navbar({ url, session }) {
           <Logo>PhotoSocial</Logo>
           <InputBox />
           <div id="icons" className="relative w-fit flex flex-row gap-3">
-            <ProfileIcon url={avatarUrl} click={ShowSettings} />
-            <SmallButton>
+            <ProfileIcon url={avatarUrl} click={showSettings} />
+            <SmallButton click={showNothing}>
               <i className="bx bx-home"></i>
             </SmallButton>
-            <SmallButton click={ShowAdd}>
+            <SmallButton click={showAdd}>
               <i className="bx bx-image-add"></i>
             </SmallButton>
-            <SmallButton>
+            <SmallButton
+              click={() => {
+                console.log("message");
+              }}
+            >
               <i className="bx bx-message-square-detail hidden"></i>
             </SmallButton>
-            <SmallButton>
+            <SmallButton
+              click={() => {
+                console.log("compass");
+              }}
+            >
               <i className="bx bx-compass hidden"></i>
             </SmallButton>
-            <SmallButton>
+            <SmallButton
+              click={() => {
+                console.log("heart");
+              }}
+            >
               <i className="bx bx-heart hidden"></i>
             </SmallButton>
           </div>
@@ -78,9 +92,9 @@ function Navbar({ url, session }) {
       <div
         className={`fixed flex justify-center w-full max-w-screen mt-12 overflow-hidden bg-black p-4 border-b-2 border-gray-800 ${
           isAddShown ? "" : "hidden"
-        } transition-all`}
+        } transition-height duration-300`}
       >
-        <NewImage key={session.user.id} session={session} click={ShowAdd} />
+        <NewImage key={session.user.id} session={session} click={showAdd} />
       </div>
     </div>
   );

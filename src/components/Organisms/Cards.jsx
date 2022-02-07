@@ -5,10 +5,10 @@ function Cards({ session }) {
   const [cardList2, setCardList] = useState([]);
 
   useEffect(() => {
-    getProfile();
+    getCards();
   }, [session]);
 
-  async function getProfile() {
+  async function getCards() {
     try {
       let { data, error, status } = await supabase
         .from("Posts")

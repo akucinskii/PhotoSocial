@@ -5,6 +5,9 @@ module.exports = {
       fontFamily: {
         Comforter: ['"Comforter"', "cursive"],
       },
+      transitionProperty: {
+        height: "height",
+      },
     },
   },
   plugins: [],

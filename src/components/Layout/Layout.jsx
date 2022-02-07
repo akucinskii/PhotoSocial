@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../Molecules/Navbar";
-import StoryBar from "../Molecules/StoryBar";
+import StoryBar from "../Organisms/StoryBar";
 import Cards from "../Organisms/Cards";
 import { supabase } from "../../supabaseClient";
 import Footer from "../Atoms/Footer";
@@ -10,6 +10,7 @@ const Layout = ({ session }) => {
   const [username, setUsername] = useState(null);
   const [website, setWebsite] = useState(null);
   const [avatar_url, setAvatarUrl] = useState(null);
+  const [storyConfig, setStoryConfig] = useState(false);
   useEffect(() => {
     getProfile();
   }, [session]);
@@ -40,6 +41,10 @@ const Layout = ({ session }) => {
       setLoading(false);
     }
   }
+
+  function storyConfigEvent() {
+    setStoryConfig(!storyConfig);
+  }
   return (
     <div>
       <Navbar
@@ -48,10 +53,12 @@ const Layout = ({ session }) => {
         loading={loading}
         website={website}
         username={username}
+        showStory={storyConfig}
+        setShowStory={storyConfigEvent}
       />
       <div className="flex w-full max-w-screen justify-center">
         <div className="flex flex-col gap-4 pt-20 w-full max-w-lg justify-center">
-          <StoryBar />
+          <StoryBar click={storyConfigEvent} />
           <Cards session={session} />
         </div>
       </div>

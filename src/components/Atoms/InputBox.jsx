@@ -4,7 +4,14 @@ function InputBox() {
   const [searchQuery, setSearchQuery] = useState(null);
   return (
     <div className=" h-fit text-gray-600 hidden md:block rounded-lg px-1 bg-gray-800 align-center relative">
-      <form action="" className="flex">
+      <form
+        action=""
+        className="flex"
+        onSubmit={(e) => {
+          e.preventDefault();
+          console.log("submit");
+        }}
+      >
         <input
           id="search"
           placeholder="Search..."

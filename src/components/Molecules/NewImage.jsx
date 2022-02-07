@@ -3,14 +3,13 @@ import { supabase } from "../../supabaseClient";
 import NewImageForm from "./NewImageForm";
 import { v4 as uuidv4 } from "uuid";
 
-export default function Account({ session }, props) {
+export default function Account() {
   const [loading, setLoading] = useState(false);
   const [description, setDescription] = useState(null);
   const [gps, setLocation] = useState(null);
   const [imgUrl, setImageUrl] = useState(null);
   async function CreatePost({ description, gps, imgUrl }) {
     try {
-      console.log(imgUrl);
       setLoading(true);
       const user = supabase.auth.user();
 
@@ -42,10 +41,9 @@ export default function Account({ session }, props) {
     <div className="text-white flex flex-col items-center content-evenly md:content-none gap-1 md:gap-2 max-h-screen max-w-lg w-full">
       <NewImageForm
         url={imgUrl}
-        size={150}
         onUpload={(url) => {
           setImageUrl(url);
-          console.log(url, imgUrl);
+          console.log("TO nie powinno", url, imgUrl);
         }}
       />
       <div>
