@@ -66,7 +66,7 @@ function Card({ url, value }) {
     if (error) {
       throw error;
     }
-    if (data.length > 0) {
+    if (data.post_id === value.id) {
       setLiked(true);
     } else {
       setLiked(false);
