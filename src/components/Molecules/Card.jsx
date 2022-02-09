@@ -5,9 +5,10 @@ import ProfileIcon from "../Atoms/ProfileIcon";
 function Card({ url, value }) {
   const [imageUrl, setImageUrl] = useState(null);
   const [avatarUrl, setAvatarUrl] = useState(null);
-  const [Liked, setLiked] = useState(null);
+  const [Liked, setLiked] = useState(false);
   const [likes, setLikes] = useState(value.heart_count);
 
+  //On load of each card start those:
   useEffect(() => {
     if (value.profiles.avatar_url) downloadIcon(value.profiles.avatar_url);
   }, [value.profiles.avatar_url]);
@@ -15,10 +16,12 @@ function Card({ url, value }) {
     if (url) downloadImage(url);
   }, [url]);
   useEffect(() => {
-    if (value) downloadLikes(value);
+    if (url) downloadLikes();
+    // If something works, dont touch it.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [value]);
+  }, [url]);
 
+  //Download small avatar on right left corner of cart
   async function downloadIcon(path) {
     try {
       const { data, error } = await supabase.storage
@@ -33,7 +36,7 @@ function Card({ url, value }) {
       console.log("Error downloading image: ", error.message);
     }
   }
-
+  //Download big image in Card
   async function downloadImage(path) {
     try {
       const { data, error } = await supabase.storage
@@ -49,6 +52,7 @@ function Card({ url, value }) {
     }
   }
 
+  //Set Timestamp value
   function toTimestamp(strDate) {
     var datum = Date.parse(strDate);
     return datum;
@@ -57,7 +61,8 @@ function Card({ url, value }) {
   let howLongAgo = toTimestamp(value.created_at);
   let diff = Math.floor((time - howLongAgo) / (1000 * 3600));
 
-  async function downloadLikes() {
+  //Check if user already liked that Card.
+  async function downloadLikes(url) {
     const { data, error } = await supabase
       .from("likedPosts")
       .select("*")
@@ -66,14 +71,21 @@ function Card({ url, value }) {
     if (error) {
       throw error;
     }
-    if (data.post_id === value.id && data.profile_id === value.profiles.id) {
+    //console.log("They shoudl be the same: ", data.profiles.profile_id, value.id);
+    if (data.length > 0) {
       setLiked(true);
     } else {
       setLiked(false);
     }
   }
+
+  //heart count += 1  if card was not liked
+  //if card is already liked then heart count -= 1
   async function toggleLike() {
     setLiked(!Liked);
+    //console.log("before check", Liked);
+
+    // If post is not liked then heart count += 1
     if (Liked) {
       let newValue = likes - 1;
       setLikes(newValue);
@@ -85,7 +97,10 @@ function Card({ url, value }) {
         throw error;
       }
       toggleLiked(false);
-    } else {
+    }
+    // If Post is already liked then heart count -=1
+    // Database sets default value as 0 so it cant get to negative value
+    else {
       let newValue = likes + 1;
       setLikes(newValue);
       const { error } = await supabase
@@ -97,9 +112,15 @@ function Card({ url, value }) {
       }
       toggleLiked(true);
     }
+    //console.log("after check", Liked)
   }
+
+  //On load set Card to liked or not, based on data in database
   async function toggleLiked(boolean) {
+    //console.log("Before toggle: ", Liked);
     if (boolean) {
+      //Insert like
+      //console.log("LIKED");
       const { error } = await supabase
         .from("likedPosts")
         .insert([{ profile_id: value.profiles.id, post_id: value.id }]);
@@ -107,6 +128,8 @@ function Card({ url, value }) {
         throw error;
       }
     } else {
+      //delete like
+      //console.log("DELETED");
       const { error } = await supabase
         .from("likedPosts")
         .delete()

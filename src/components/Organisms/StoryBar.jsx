@@ -11,7 +11,7 @@ function StoryBar({ click, session }) {
     getStories();
   }, [session]);
 
-  //function that gets all Stories after auth and getting session.
+  //Get all stories from database
   async function getStories() {
     try {
       let { data, error, status } = await supabase
@@ -30,7 +30,7 @@ function StoryBar({ click, session }) {
       if (error && status !== 406) {
         throw error;
       }
-      console.log(data);
+      //console.log("Story data after downloading: "data);
 
       if (data) {
         setStories(data);

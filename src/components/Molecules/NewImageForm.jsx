@@ -8,8 +8,9 @@ export default function NewImageForm({ url, onUpload, story }) {
   useEffect(() => {
     if (url) downloadImage(url);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [downloadImage]);
+  }, [url]);
 
+  //Dowload image as miniature while making new Post (Card).
   async function downloadImage(path) {
     console.log("download ", path);
     try {
@@ -29,6 +30,8 @@ export default function NewImageForm({ url, onUpload, story }) {
     }
     console.log("sucessfully downloaded image: ", url);
   }
+
+  //Upload image to database
   async function uploadImage(event) {
     try {
       setUploading(true);
@@ -58,6 +61,7 @@ export default function NewImageForm({ url, onUpload, story }) {
       setUploading(false);
     }
   }
+
   return (
     <div className="p-3 flex flex-col gap-3 text-center">
       {ImageUrl ? (

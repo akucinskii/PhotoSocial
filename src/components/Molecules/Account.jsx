@@ -12,6 +12,7 @@ export default function Account({ session }) {
     getProfile();
   }, [session]);
 
+  //get profile of current user.
   async function getProfile() {
     try {
       setLoading(true);
@@ -39,6 +40,7 @@ export default function Account({ session }) {
     }
   }
 
+  //on change in profile section, update profile.
   async function updateProfile({ username, website, avatar_url }) {
     try {
       setLoading(true);
@@ -55,7 +57,7 @@ export default function Account({ session }) {
       let { error } = await supabase.from("profiles").upsert(updates, {
         returning: "minimal", // Don't return the value after inserting
       });
-      console.log("OKK");
+      //console.log("profile got updated");
 
       if (error) {
         throw error;
@@ -72,6 +74,7 @@ export default function Account({ session }) {
       <Avatar
         url={avatar_url}
         size={150}
+        //on Upload of new image set avatar to it and update Profile.
         onUpload={(url) => {
           setAvatarUrl(url);
           updateProfile({ username, website, avatar_url: url });

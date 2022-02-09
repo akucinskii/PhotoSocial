@@ -8,6 +8,8 @@ export default function Account() {
   const [description, setDescription] = useState(null);
   const [gps, setLocation] = useState(null);
   const [imgUrl, setImageUrl] = useState(null);
+
+  //Create new post
   async function CreatePost({ description, gps, imgUrl }) {
     try {
       setLoading(true);
@@ -43,7 +45,6 @@ export default function Account() {
         url={imgUrl}
         onUpload={(url) => {
           setImageUrl(url);
-          console.log("TO nie powinno", url, imgUrl);
         }}
       />
       <div>

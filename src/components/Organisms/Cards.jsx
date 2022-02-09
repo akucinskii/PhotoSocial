@@ -8,6 +8,7 @@ function Cards({ session }) {
     getCards();
   }, [session]);
 
+  //get every card from the database.
   async function getCards() {
     try {
       let { data, error, status } = await supabase
@@ -37,9 +38,9 @@ function Cards({ session }) {
       alert(error.message);
     }
   }
-
   return (
     <div className="flex flex-col-reverse gap-8">
+      {/*  display every card */}
       {cardList2.map((value) => (
         <Card
           key={value.id}

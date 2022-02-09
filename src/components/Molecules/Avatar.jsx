@@ -9,6 +9,7 @@ export default function Avatar({ url, size, onUpload }) {
     if (url) downloadImage(url);
   }, [url]);
 
+  //donwload avatar as small miniature while updating Profile
   async function downloadImage(path) {
     try {
       const { data, error } = await supabase.storage
@@ -24,6 +25,7 @@ export default function Avatar({ url, size, onUpload }) {
     }
   }
 
+  //upload new Avatar
   async function uploadAvatar(event) {
     try {
       setUploading(true);
