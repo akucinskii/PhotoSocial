@@ -6,11 +6,13 @@ import ProfileIcon from "../Atoms/ProfileIcon";
 import SmallButton from "../Atoms/SmallButton";
 import Account from "./Account";
 import NewImage from "./NewImage";
+import NewStory from "./NewStory";
 
-function Navbar({ url, session, showStory, setShowStory }) {
+function Navbar({ url, session, addShowStory, setAddShowStory }) {
   const [avatarUrl, setAvatarUrl] = useState(null);
-  const [isShown, setIsShown] = useState(false);
-  const [isAddShown, setIsAddShown] = useState(false);
+  const [SettingsShown, setSettingsShown] = useState(false);
+  const [AddPhotoShown, setAddPhotoShown] = useState(false);
+  const [AddStoryShown, setAddStoryShown] = useState(false);
 
   useEffect(() => {
     if (url) downloadImage(url);
@@ -30,19 +32,24 @@ function Navbar({ url, session, showStory, setShowStory }) {
       console.log("Error downloading image: ", error.message);
     }
   }
-
-  const showSettings = () => {
-    if (isAddShown) setIsAddShown(false);
-    setIsShown(!isShown);
-  };
-
-  const showAdd = () => {
-    if (isShown) setIsShown(false);
-    setIsAddShown(!isAddShown);
-  };
   const showNothing = () => {
-    setIsAddShown(false);
-    setIsShown(false);
+    setAddPhotoShown(false);
+    setSettingsShown(false);
+    setAddStoryShown(false);
+  };
+
+  const showProfileSettings = () => {
+    showNothing();
+    setSettingsShown(!SettingsShown);
+  };
+
+  const showAddPhoto = () => {
+    showNothing();
+    setAddPhotoShown(!AddPhotoShown);
+  };
+  const showAddStory = () => {
+    showNothing();
+    setAddStoryShown(!AddStoryShown);
   };
   return (
     <div>
@@ -51,19 +58,19 @@ function Navbar({ url, session, showStory, setShowStory }) {
           <Logo>PhotoSocial</Logo>
           <InputBox />
           <div id="icons" className="relative w-fit flex flex-row gap-3">
-            <ProfileIcon url={avatarUrl} click={showSettings} />
+            <ProfileIcon url={avatarUrl} click={showProfileSettings} />
             <SmallButton click={showNothing}>
               <i className="bx bx-home"></i>
             </SmallButton>
-            <SmallButton click={showAdd}>
+            <SmallButton click={showAddPhoto}>
               <i className="bx bx-image-add"></i>
             </SmallButton>
             <SmallButton
               click={() => {
-                console.log("message");
+                showAddStory();
               }}
             >
-              <i className="bx bx-message-square-detail hidden"></i>
+              <i className="bx bx-add-to-queue"></i>
             </SmallButton>
             <SmallButton
               click={() => {
@@ -84,17 +91,28 @@ function Navbar({ url, session, showStory, setShowStory }) {
       </div>
       <div
         className={`fixed flex justify-center w-full max-w-screen mt-12 overflow-hidden bg-black p-4 border-b-2 border-gray-800 ${
-          isShown ? "" : "hidden"
+          AddStoryShown ? "" : "hidden"
+        } transition-all`}
+      >
+        <NewStory key={session.user.id} session={session} />
+      </div>
+      <div
+        className={`fixed flex justify-center w-full max-w-screen mt-12 overflow-hidden bg-black p-4 border-b-2 border-gray-800 ${
+          SettingsShown ? "" : "hidden"
         } transition-all`}
       >
         <Account key={session.user.id} session={session} />
       </div>
       <div
         className={`fixed flex justify-center w-full max-w-screen mt-12 overflow-hidden bg-black p-4 border-b-2 border-gray-800 ${
-          isAddShown ? "" : "hidden"
+          AddPhotoShown ? "" : "hidden"
         } transition-height duration-300`}
       >
-        <NewImage key={session.user.id} session={session} click={showAdd} />
+        <NewImage
+          key={session.user.id}
+          session={session}
+          click={showAddPhoto}
+        />
       </div>
     </div>
   );
