@@ -8,7 +8,7 @@ import Account from "./Account";
 import NewImage from "./NewImage";
 import NewStory from "./NewStory";
 
-function Navbar({ url, session, addShowStory, setAddShowStory }) {
+function Navbar({ url, session, setVisible }) {
   const [avatarUrl, setAvatarUrl] = useState(null);
   const [SettingsShown, setSettingsShown] = useState(false);
   const [AddPhotoShown, setAddPhotoShown] = useState(false);
@@ -36,6 +36,7 @@ function Navbar({ url, session, addShowStory, setAddShowStory }) {
     setAddPhotoShown(false);
     setSettingsShown(false);
     setAddStoryShown(false);
+    setVisible(false);
   };
 
   const showProfileSettings = () => {

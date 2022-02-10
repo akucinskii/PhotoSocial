@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { supabase } from "../../supabaseClient";
 
-function RoundIcon({ value, click }) {
+function RoundIcon({ data, click }) {
   const [avatarUrl, setAvatarUrl] = useState(null);
   useEffect(() => {
-    if (value.profiles.avatar_url) downloadIcon(value.profiles.avatar_url);
-  }, [value.profiles.avatar_url]);
+    if (data.profiles.avatar_url) downloadIcon(data.profiles.avatar_url);
+  }, [data.profiles.avatar_url]);
   async function downloadIcon(path) {
     try {
       const { data, error } = await supabase.storage
@@ -21,7 +21,12 @@ function RoundIcon({ value, click }) {
     }
   }
   return (
-    <button onClick={click} className="flex flex-col items-center gap-2">
+    <button
+      onClick={() => {
+        click(data);
+      }}
+      className="flex flex-col items-center gap-2"
+    >
       <div className="w-fit rounded-full bg-gradient-to-tr p-[3px] from-[#dfab01]  via-[#ff0080] to-[#820086]">
         <div className="flex flex-col justify-between h-full bg-black rounded-full p-[3px]">
           <div
@@ -36,7 +41,7 @@ function RoundIcon({ value, click }) {
         </div>
       </div>
       <h1 className="text-sm text-center w-fit max-w-[3rem] truncate">
-        {value.profiles.username}
+        {data.profiles.username}
       </h1>
     </button>
   );

@@ -101,7 +101,7 @@ export default function Account({ session }) {
         />
       </div>
       <div>
-        <p>WEBSITE:</p>
+        <p>Website:</p>
         <input
           id="website"
           type="website"

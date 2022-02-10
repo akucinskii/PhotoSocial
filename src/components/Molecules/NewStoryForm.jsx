@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../../supabaseClient";
 
-export default function Avatar({ url, size, onUpload }) {
+export default function NewStoryForm({ url, size, onUpload }) {
   const [StoryUrl, setStoryUrl] = useState(null);
   const [uploading, setUploading] = useState(false);
 
@@ -70,7 +70,10 @@ export default function Avatar({ url, size, onUpload }) {
         <div className="bg-gray-200 rounded-full w-full" />
       )}
       <div className="border-2 border-gray-800 rounded-lg p-2 hover:bg-gray-900 active:bg-gray-800 focus:bg-gray-900">
-        <label className="button primary block" htmlFor="single">
+        <label
+          className="button primary block hover:cursor-pointer"
+          htmlFor="single"
+        >
           {uploading ? "Uploading ..." : "Upload"}
         </label>
         <input

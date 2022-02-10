@@ -71,7 +71,10 @@ export default function Avatar({ url, size, onUpload }) {
         />
       )}
       <div className="border-2 border-gray-800 rounded-lg p-2 hover:bg-gray-900 active:bg-gray-800 focus:bg-gray-900">
-        <label className="button primary block" htmlFor="single">
+        <label
+          className="button primary block hover:cursor-pointer"
+          htmlFor="single"
+        >
           {uploading ? "Uploading ..." : "Upload"}
         </label>
         <input
