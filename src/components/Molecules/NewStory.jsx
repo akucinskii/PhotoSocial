@@ -6,6 +6,8 @@ import { v4 as uuidv4 } from "uuid";
 function NewStory() {
   const [loading, setLoading] = useState(false);
   const [storyUrl, setStoryUrl] = useState(null);
+
+  //create new story in database.
   async function createStory(imgUrl) {
     try {
       setLoading(true);
