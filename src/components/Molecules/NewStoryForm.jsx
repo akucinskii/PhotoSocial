@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "../../supabaseClient";
 
 export default function Avatar({ url, size, onUpload }) {
-  const [avatarUrl, setAvatarUrl] = useState(null);
+  const [StoryUrl, setStoryUrl] = useState(null);
   const [uploading, setUploading] = useState(false);
 
   useEffect(() => {
@@ -20,14 +20,14 @@ export default function Avatar({ url, size, onUpload }) {
         throw error;
       }
       const url = URL.createObjectURL(data);
-      setAvatarUrl(url);
+      setStoryUrl(url);
     } catch (error) {
       console.log("Error downloading image: ", error.message);
     }
   }
 
   //upload new Avatar
-  async function uploadAvatar(event) {
+  async function uploadStory(event) {
     console.log("upload image", event);
     try {
       setUploading(true);
@@ -58,19 +58,16 @@ export default function Avatar({ url, size, onUpload }) {
   }
 
   return (
-    <div className="flex flex-col gap-3 text-center">
-      {avatarUrl ? (
+    <div className="p-3 flex flex-col gap-3 text-center">
+      <p className="font-bold">UPLOAD NEW STORY</p>
+      {StoryUrl ? (
         <img
-          src={avatarUrl}
+          src={StoryUrl}
           alt="Avatar"
-          className="rounded-full object-cover"
-          style={{ height: size, width: size }}
+          className="w-72 h-72 object-cover max-w-screen"
         />
       ) : (
-        <div
-          className="bg-gray-200 rounded-full"
-          style={{ height: size, width: size }}
-        />
+        <div className="bg-gray-200 rounded-full w-full" />
       )}
       <div className="border-2 border-gray-800 rounded-lg p-2 hover:bg-gray-900 active:bg-gray-800 focus:bg-gray-900">
         <label className="button primary block" htmlFor="single">
@@ -84,7 +81,7 @@ export default function Avatar({ url, size, onUpload }) {
           type="file"
           id="single"
           accept="image/*"
-          onChange={uploadAvatar}
+          onChange={uploadStory}
           disabled={uploading}
         />
       </div>

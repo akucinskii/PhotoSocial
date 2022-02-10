@@ -5,9 +5,8 @@ import { v4 as uuidv4 } from "uuid";
 
 function NewStory() {
   const [loading, setLoading] = useState(false);
-  const [storyData, setStoryData] = useState([]);
   const [storyUrl, setStoryUrl] = useState(null);
-  async function CreateStory(imgUrl) {
+  async function createStory(imgUrl) {
     try {
       setLoading(true);
       const user = supabase.auth.user();
@@ -32,22 +31,30 @@ function NewStory() {
       setLoading(false);
     }
   }
-  console.log(storyData);
   return (
-    <div>
-      <button
-        onClick={() => {
-          CreateStory(storyUrl);
-        }}
-      >
-        OK
-      </button>
+    <div className="text-white flex flex-col items-center content-evenly md:content-none gap-1 md:gap-2 max-h-screen max-w-lg w-full">
       <NewStoryForm
         url={storyUrl}
         onUpload={(url) => {
           setStoryUrl(url);
         }}
       />
+      <div>
+        <button
+          className="bg-black border-2 border-gray-800 focus:outline-none rounded-lg p-2 px-4 hover:bg-gray-900 active:bg-gray-800 focus:bg-gray-900 disabled:bg-gray-400"
+          onClick={() => {
+            createStory(storyUrl);
+          }}
+          disabled={loading}
+        >
+          {loading ? "Loading ..." : "Upload your new story"}
+        </button>
+      </div>
+      <div>
+        <p className="bg-gray-600">
+          Reload your page after a successful upload
+        </p>
+      </div>
     </div>
   );
 }

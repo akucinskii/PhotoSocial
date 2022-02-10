@@ -64,6 +64,7 @@ export default function NewImageForm({ url, onUpload, story }) {
 
   return (
     <div className="p-3 flex flex-col gap-3 text-center">
+      <p className="font-bold">UPLOAD NEW POST</p>
       {ImageUrl ? (
         <img
           src={ImageUrl}
