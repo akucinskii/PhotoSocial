@@ -9,6 +9,7 @@ Features:
 - responsive design
 - Adding posts functionality
 
+I didn't know how to use Redux or Recoil while making this. I also had no idea that Context API existed so props passing in this project is bad, really bad. :no_good:
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
