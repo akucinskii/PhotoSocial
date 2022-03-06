@@ -3,9 +3,11 @@ import { supabase } from "../../supabaseClient";
 
 function RoundIcon({ data, click }) {
   const [avatarUrl, setAvatarUrl] = useState(null);
+
   useEffect(() => {
     if (data.profiles.avatar_url) downloadIcon(data.profiles.avatar_url);
   }, [data.profiles.avatar_url]);
+
   async function downloadIcon(path) {
     try {
       const { data, error } = await supabase.storage
