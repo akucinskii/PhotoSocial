@@ -8,6 +8,8 @@ Features:
 - Avatar image can be updated 
 - responsive design
 - Adding posts functionality
+- Adding stories functionality
+- Posts can be liked by each user
 
 I didn't know how to use Redux or Recoil while making this. I also had no idea that Context API existed so props passing in this project is bad, really bad. :no_good:
 
