@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../../supabaseClient";
 
-export default function NewStoryForm({ url, size, onUpload }) {
+export default function NewStoryForm({ url, onUpload }) {
   const [StoryUrl, setStoryUrl] = useState(null);
   const [uploading, setUploading] = useState(false);
 

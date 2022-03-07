@@ -72,7 +72,7 @@ export default function NewImageForm({ url, onUpload, story }) {
           className="w-72 h-72 object-cover max-w-screen"
         />
       ) : (
-        <div className="bg-gray-200 rounded-full w-full" />
+        <div className="bg-gray-200 rounded-full w-full"></div>
       )}
       <div className="border-2 border-gray-800 rounded-lg p-2 hover:bg-gray-900 active:bg-gray-800 focus:bg-gray-900">
         <label
