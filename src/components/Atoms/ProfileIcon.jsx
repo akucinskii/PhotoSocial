@@ -5,7 +5,7 @@ function ProfileIcon(props) {
     <button onClick={props.click}>
       <div className="align-center items-center mb-auto rounded-full overflow-hidden">
         {!props.url ? (
-          <div className="w-[24px] h-[24px] bg-gray-800" />
+          <i className="bx bx-user"></i>
         ) : (
           <img
             src={props.url}
