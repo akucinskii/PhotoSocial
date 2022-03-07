@@ -5,7 +5,7 @@ import Avatar from "./Avatar";
 export default function Account({ session }) {
   const [loading, setLoading] = useState(true);
   const [username, setUsername] = useState(null);
-  const [website, setWebsite] = useState(null);
+  const [description, setDescription] = useState(null);
   const [avatar_url, setAvatarUrl] = useState(null);
 
   useEffect(() => {
@@ -20,7 +20,7 @@ export default function Account({ session }) {
 
       let { data, error, status } = await supabase
         .from("profiles")
-        .select(`username, website, avatar_url`)
+        .select(`username, description, avatar_url`)
         .eq("id", user.id)
         .single();
 
@@ -30,7 +30,7 @@ export default function Account({ session }) {
 
       if (data) {
         setUsername(data.username);
-        setWebsite(data.website);
+        setDescription(data.description);
         setAvatarUrl(data.avatar_url);
       }
     } catch (error) {
@@ -41,7 +41,7 @@ export default function Account({ session }) {
   }
 
   //on change in profile section, update profile.
-  async function updateProfile({ username, website, avatar_url }) {
+  async function updateProfile({ username, description, avatar_url }) {
     try {
       setLoading(true);
       const user = supabase.auth.user();
@@ -49,7 +49,7 @@ export default function Account({ session }) {
       const updates = {
         id: user.id,
         username,
-        website,
+        description,
         avatar_url,
         updated_at: new Date(),
       };
@@ -77,7 +77,7 @@ export default function Account({ session }) {
         //on Upload of new image set avatar to it and update Profile.
         onUpload={(url) => {
           setAvatarUrl(url);
-          updateProfile({ username, website, avatar_url: url });
+          updateProfile({ username, description, avatar_url: url });
         }}
       />
       <div className="w-fit">
@@ -101,12 +101,12 @@ export default function Account({ session }) {
         />
       </div>
       <div>
-        <p>Website:</p>
+        <p>Description:</p>
         <input
-          id="website"
-          type="website"
-          value={website || ""}
-          onChange={(e) => setWebsite(e.target.value)}
+          id="description"
+          type="description"
+          value={description || ""}
+          onChange={(e) => setDescription(e.target.value)}
           className="bg-black border-2 border-gray-800 focus:outline-none rounded-lg p-1"
         />
       </div>
@@ -114,7 +114,7 @@ export default function Account({ session }) {
       <div>
         <button
           className="bg-black border-2 border-gray-800 focus:outline-none rounded-lg p-2 px-4 hover:bg-gray-900 active:bg-gray-800 focus:bg-gray-900 disabled:bg-gray-400"
-          onClick={() => updateProfile({ username, website, avatar_url })}
+          onClick={() => updateProfile({ username, description, avatar_url })}
           disabled={loading}
         >
           {loading ? "Loading ..." : "Update"}
