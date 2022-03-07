@@ -9,7 +9,8 @@ function Stories({ session, show, value, setVisible }) {
     if (value !== null && session) downloadStory(value.img_url);
   }, [value, session]);
   useEffect(() => {
-    if (value !== null && session) downloadAvatar(value.profiles.avatar_url);
+    if (value !== null && session && value.profiles.avatar_url)
+      downloadAvatar(value.profiles.avatar_url);
   }, [value, session]);
 
   //download avatar for story.
@@ -60,7 +61,12 @@ function Stories({ session, show, value, setVisible }) {
 
       <div className="flex flex-col w-[32rem] max-h-screen h-[43.75rem] max-w-screen bg-gray-700 relative">
         <div className=" absolute flex flex-row w-full gap-4 h-min align-center p-2 bg-gray-700/50">
-          <ProfileIcon url={avatarUrl} />
+          {avatarUrl != null ? (
+            <ProfileIcon url={avatarUrl} />
+          ) : (
+            <i className="bx bx-user text-2xl flex text-center"></i>
+          )}
+
           {value ? (
             <span className="text-2xl">{value.profiles.username}</span>
           ) : (
@@ -68,7 +74,7 @@ function Stories({ session, show, value, setVisible }) {
           )}
         </div>
         <div className="flex h-full justify-center">
-          <img src={storyUrl} alt="ZDJECIE" className="object-cover" />
+          <img src={storyUrl} alt="profile" className="object-cover" />
         </div>
         <div></div>
       </div>
