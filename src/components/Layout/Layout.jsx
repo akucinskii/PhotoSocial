@@ -9,7 +9,7 @@ import Stories from "../Organisms/Stories";
 const Layout = ({ session }) => {
   const [loading, setLoading] = useState(true);
   const [username, setUsername] = useState(null);
-  const [website, setWebsite] = useState(null);
+  const [description, setDescription] = useState(null);
   const [avatar_url, setAvatarUrl] = useState(null);
   const [showStories, setShowStories] = useState(false);
   const [storiesValues, setStoriesValues] = useState(null);
@@ -24,7 +24,7 @@ const Layout = ({ session }) => {
 
       let { data, error, status } = await supabase
         .from("profiles")
-        .select(`username, website, avatar_url`)
+        .select(`username, description, avatar_url`)
         .eq("id", user.id)
         .single();
 
@@ -34,7 +34,7 @@ const Layout = ({ session }) => {
 
       if (data) {
         setUsername(data.username);
-        setWebsite(data.website);
+        setDescription(data.description);
         setAvatarUrl(data.avatar_url);
       }
     } catch (error) {
@@ -67,7 +67,7 @@ const Layout = ({ session }) => {
           session={session}
           url={avatar_url}
           loading={loading}
-          website={website}
+          description={description}
           username={username}
           setVisible={setStoriesVisible}
         />
