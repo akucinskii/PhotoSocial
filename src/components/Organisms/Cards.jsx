@@ -1,9 +1,8 @@
 import Card from "../Molecules/Card";
 import React, { useEffect, useState } from "react";
 import { supabase } from "../../supabaseClient";
-function Cards({ session }) {
+function Cards({ session, username }) {
   const [cardList2, setCardList] = useState([]);
-
   useEffect(() => {
     getCards();
   }, [session]);
@@ -39,7 +38,7 @@ function Cards({ session }) {
     }
   }
   return (
-    <div className="flex flex-col-reverse gap-8">
+    <div className="flex flex-col-reverse items-center gap-8">
       {/*  display every card */}
       {cardList2.map((value) => (
         <Card
@@ -49,6 +48,14 @@ function Cards({ session }) {
           url={value.img_url}
         />
       ))}
+      {!username && (
+        <div className="flex items-center align-center w-3/4">
+          <h1 className="text-center text-bold text-lg">
+            To like or create posts, u need to set your username first in{" "}
+            <i className="bx bx-user"></i> tab.
+          </h1>
+        </div>
+      )}
     </div>
   );
 }
