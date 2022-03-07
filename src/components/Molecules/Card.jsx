@@ -7,7 +7,7 @@ function Card({ url, value }) {
   const [avatarUrl, setAvatarUrl] = useState(null);
   const [Liked, setLiked] = useState(false);
   const [likes, setLikes] = useState(value.heart_count);
-
+  const user = supabase.auth.user();
   //On load of each card start those:
   useEffect(() => {
     if (value.profiles.avatar_url) downloadIcon(value.profiles.avatar_url);
@@ -16,10 +16,10 @@ function Card({ url, value }) {
     if (url) downloadImage(url);
   }, [url]);
   useEffect(() => {
-    if (url) downloadLikes();
-    // If something works, dont touch it.
+    if (user) downloadLikes();
+    // Works (?).
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [url]);
+  }, [user]);
 
   //Download small avatar on right left corner of cart
   async function downloadIcon(path) {
@@ -62,16 +62,16 @@ function Card({ url, value }) {
   let diff = Math.floor((time - howLongAgo) / (1000 * 3600));
 
   //Check if user already liked that Card.
-  async function downloadLikes(url) {
+  async function downloadLikes() {
     const { data, error } = await supabase
       .from("likedPosts")
       .select("*")
-      .eq("profile_id", value.profiles.id)
-      .eq("post_id", value.id);
+      .eq("post_id", value.id)
+      .eq("profile_id", user.id);
     if (error) {
       throw error;
     }
-    //console.log("They shoudl be the same: ", data.profiles.profile_id, value.id);
+    //console.log(data, user.id, value.profiles.id);
     if (data.length > 0) {
       setLiked(true);
     } else {
@@ -123,7 +123,7 @@ function Card({ url, value }) {
       //console.log("LIKED");
       const { error } = await supabase
         .from("likedPosts")
-        .insert([{ profile_id: value.profiles.id, post_id: value.id }]);
+        .insert([{ profile_id: user.id, post_id: value.id }]);
       if (error) {
         throw error;
       }
@@ -133,7 +133,7 @@ function Card({ url, value }) {
       const { error } = await supabase
         .from("likedPosts")
         .delete()
-        .eq("profile_id", value.profiles.id)
+        .eq("profile_id", user.id)
         .eq("post_id", value.id);
       if (error) {
         throw error;
