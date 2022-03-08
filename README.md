@@ -1,5 +1,4 @@
-# simple
-
+# Use [10minutemail](https://10minutemail.com/) for fast login
 Instagram clone made with react, Tailwind CSS and Supabase.
 
 Features:
