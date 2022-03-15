@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { supabase } from "../../supabaseClient";
 import ProfileIcon from "../Atoms/ProfileIcon";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 function Stories({ session, show, value, setVisible }) {
   const [storyUrl, setStoryUrl] = useState(null);
@@ -74,7 +75,11 @@ function Stories({ session, show, value, setVisible }) {
           )}
         </div>
         <div className="flex h-full justify-center">
-          <img src={storyUrl} alt="profile" className="object-cover" />
+          <LazyLoadImage
+            src={storyUrl}
+            alt="profile"
+            className="object-cover"
+          />
         </div>
         <div></div>
       </div>
