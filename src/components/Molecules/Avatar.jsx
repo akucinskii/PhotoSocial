@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../../supabaseClient";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 export default function Avatar({ url, size, onUpload }) {
   const [avatarUrl, setAvatarUrl] = useState(null);
@@ -58,7 +59,7 @@ export default function Avatar({ url, size, onUpload }) {
   return (
     <div className="flex flex-col gap-3 text-center">
       {avatarUrl ? (
-        <img
+        <LazyLoadImage
           src={avatarUrl}
           alt="Avatar"
           className="rounded-full object-cover"

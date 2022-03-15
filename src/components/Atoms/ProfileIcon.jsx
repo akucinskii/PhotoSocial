@@ -1,4 +1,5 @@
 import React from "react";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 function ProfileIcon(props) {
   return (
@@ -7,7 +8,7 @@ function ProfileIcon(props) {
         {!props.url ? (
           <i className="bx bx-user"></i>
         ) : (
-          <img
+          <LazyLoadImage
             src={props.url}
             alt=""
             className="object-cover w-[24px] h-[24px]"

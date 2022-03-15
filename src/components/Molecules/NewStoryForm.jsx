@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../../supabaseClient";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 export default function NewStoryForm({ url, onUpload }) {
   const [StoryUrl, setStoryUrl] = useState(null);
@@ -61,7 +62,7 @@ export default function NewStoryForm({ url, onUpload }) {
     <div className="p-3 flex flex-col gap-3 text-center">
       <p className="font-bold">UPLOAD NEW STORY</p>
       {StoryUrl ? (
-        <img
+        <LazyLoadImage
           src={StoryUrl}
           alt="Avatar"
           className="w-72 h-72 object-cover max-w-screen"

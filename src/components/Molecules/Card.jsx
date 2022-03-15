@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { supabase } from "../../supabaseClient";
 import ProfileIcon from "../Atoms/ProfileIcon";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 function Card({ url, value }) {
   const [imageUrl, setImageUrl] = useState(null);
@@ -148,7 +149,10 @@ function Card({ url, value }) {
         <h1>{value.profiles.username}</h1>
       </div>
       <div>
-        <img
+        <LazyLoadImage
+          width="100%"
+          height="fit-content"
+          key={value.id}
           src={imageUrl}
           alt=""
           className="object-cover object-center h-[32rem] w-full"
