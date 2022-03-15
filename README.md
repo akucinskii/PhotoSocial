@@ -1,4 +1,8 @@
 # Use [10minutemail](https://10minutemail.com/) for fast login
+
+# Site takes way too long to start due to re-downloading images!!!
+
+
 Instagram clone made with react, Tailwind CSS and Supabase.
 
 Features:
@@ -9,6 +13,8 @@ Features:
 - Adding posts functionality
 - Adding stories functionality
 - Posts can be liked by each user
+
+
 
 I didn't know how to use Redux or Recoil while making this. I also had no idea that Context API existed so props passing in this project is bad, really bad. :no_good:
 
