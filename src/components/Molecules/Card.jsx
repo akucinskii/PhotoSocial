@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { supabase } from "../../supabaseClient";
 import ProfileIcon from "../Atoms/ProfileIcon";
-import { LazyLoadImage } from "react-lazy-load-image-component";
+import {
+  LazyLoadImage,
+  LazyLoadComponent,
+} from "react-lazy-load-image-component";
 
 function Card({ url, value }) {
   const [imageUrl, setImageUrl] = useState(null);
@@ -143,54 +146,58 @@ function Card({ url, value }) {
   }
 
   return (
-    <div className="flex flex-col w-full h-fit p-2">
-      <div className="py-2 text-lg flex flex-row gap-2">
-        <ProfileIcon url={avatarUrl} />
-        <h1>{value.profiles.username}</h1>
-      </div>
-      <div>
-        <LazyLoadImage
-          width="100%"
-          height="fit-content"
-          key={value.id}
-          src={imageUrl}
-          alt=""
-          className="object-cover object-center h-[32rem] w-full"
-        />
+    <LazyLoadComponent>
+      <div className="flex flex-col w-full h-fit p-2">
+        <div className="py-2 text-lg flex flex-row gap-2">
+          <ProfileIcon url={avatarUrl} />
+          <h1>{value.profiles.username}</h1>
+        </div>
         <div>
-          <div className="flex flex-row text-3xl pt-3 w-full ">
-            <button onClick={toggleLike}>
-              <i
-                className={`bx ${
-                  Liked ? "text-red-900 bxs-heart " : "bx-heart"
-                }`}
-              ></i>
-            </button>
-            <button>
-              <i className="bx bx-comment hidden"></i>
-            </button>
-            <button>
-              <i className="bx bx-paper-plane "></i>
-            </button>
-            <button className="ml-auto">
-              <i className="bx bx-bookmark"></i>
-            </button>
-          </div>
-          <div className="p-2">
-            <h1>{likes} users like it</h1>
-            <p className="text-gray-200">
-              <span className="font-semibold">{value.profiles.username}: </span>
-              {value.description}
-            </p>
-            <p className="text-xs text-gray-600">
-              {diff > 24
-                ? `${Math.floor(diff / 24)} days ago`
-                : `${diff} hours ago`}
-            </p>
+          <LazyLoadImage
+            width="100%"
+            height="fit-content"
+            key={value.id}
+            src={imageUrl}
+            alt=""
+            className="object-cover object-center h-[32rem] w-full"
+          />
+          <div>
+            <div className="flex flex-row text-3xl pt-3 w-full ">
+              <button onClick={toggleLike}>
+                <i
+                  className={`bx ${
+                    Liked ? "text-red-900 bxs-heart " : "bx-heart"
+                  }`}
+                ></i>
+              </button>
+              <button>
+                <i className="bx bx-comment hidden"></i>
+              </button>
+              <button>
+                <i className="bx bx-paper-plane "></i>
+              </button>
+              <button className="ml-auto">
+                <i className="bx bx-bookmark"></i>
+              </button>
+            </div>
+            <div className="p-2">
+              <h1>{likes} users like it</h1>
+              <p className="text-gray-200">
+                <span className="font-semibold">
+                  {value.profiles.username}:{" "}
+                </span>
+                {value.description}
+              </p>
+              <p className="text-xs text-gray-600">
+                {diff > 24
+                  ? `${Math.floor(diff / 24)} days ago`
+                  : `${diff} hours ago`}
+              </p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </LazyLoadComponent>
   );
 }
 

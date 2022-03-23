@@ -23,7 +23,7 @@ function Cards({ session, username }) {
       profiles:profile_id (id, username, avatar_url)
       `
         )
-        .order("created_at", { ascending: true })
+        .order("created_at", { ascending: false })
         .limit(10);
 
       if (error && status !== 406) {
@@ -38,7 +38,7 @@ function Cards({ session, username }) {
     }
   }
   return (
-    <div className="flex flex-col-reverse items-center gap-8">
+    <div className="flex flex-col items-center gap-8">
       {/*  display every card */}
       {cardList2.map((value) => (
         <Card
