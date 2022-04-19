@@ -1,6 +1,6 @@
 # Use [10minutemail](https://10minutemail.com/) for fast login
 
-# Site takes way too long (up to 40 seconds) to start due to re-downloading images!!!
+# Site takes way too long (up to 40 seconds) to start.
 
 
 Instagram clone made with react, Tailwind CSS and Supabase.
